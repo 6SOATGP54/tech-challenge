@@ -13,9 +13,10 @@ Especificação dos requisitos funcionais do sistema.
 ## Pedido
 Os clientes são apresentados a uma interface de seleção na qual podem optar por se identificarem via CPF, se cadastrarem com nome, e-mail ou não se identificar, podendo montar o combo na seguinte sequência, sendo todas elas opcionais:
 
-- Lanche
-- Acompanhamento
-- Bebida
+1. Lanche
+2. Acompanhamento
+3. Bebida
+4. Sobremesa
 
 Em cada etapa é exibido o nome, descrição e preço de cada produto.
 
