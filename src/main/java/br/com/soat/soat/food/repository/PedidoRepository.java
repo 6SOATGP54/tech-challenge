@@ -8,10 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido,Long> {
     @Transactional
     @Modifying
     @Query("update Pedido p set p.acompanhamento = ?1 where p.id = ?2")
     int acompanhamentoPedido(StatusAcompanhamento acompanhamento, Long id);
+
+    List<Pedido> findByAcompanhamento(StatusAcompanhamento acompanhamento);
 }

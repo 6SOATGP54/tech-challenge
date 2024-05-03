@@ -6,6 +6,8 @@ import br.com.soat.soat.food.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ClienteService {
 
@@ -15,5 +17,10 @@ public class ClienteService {
 
     public Cliente cadastroEupdateCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
+    }
+
+    public Cliente buscarClienteCPF(Long cpf) {
+        Optional<Cliente> clienteEncontrado = clienteRepository.findByCpf(String.valueOf(cpf));
+        return clienteEncontrado.orElseGet(Cliente::new);
     }
 }

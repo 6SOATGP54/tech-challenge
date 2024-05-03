@@ -1,5 +1,6 @@
 package br.com.soat.soat.food.controller;
 
+import br.com.soat.soat.food.model.Cliente;
 import br.com.soat.soat.food.model.Produto;
 import br.com.soat.soat.food.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,11 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.FOUND)
     public ResponseEntity<List<Produto>> insertOrUpdateSala() {
         return ResponseEntity.ok(produtoService.listarProdutos());
+    }
+
+    @PostMapping("/listarProdutosDesconto")
+    @ResponseStatus(HttpStatus.FOUND)
+    public ResponseEntity<List<Produto>> produtosComDesconto(@RequestBody Cliente cliente) {
+        return ResponseEntity.ok(produtoService.setarDecontoProdutos(cliente));
     }
 }

@@ -31,4 +31,10 @@ public abstract class Entidade {
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    @PrePersist
+    public void setarDataCadastro(){
+        this.setDataCadastro(LocalDateTime.now());
+    }
+
 }

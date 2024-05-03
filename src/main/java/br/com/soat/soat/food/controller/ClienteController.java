@@ -23,5 +23,11 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.cadastroEupdateCliente(cliente));
     }
 
+    @GetMapping("/pesquisarCliente/{cpf}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Cliente> buscarClienteCPF(@PathVariable  Long cpf) {
+        return ResponseEntity.ok(clienteService.buscarClienteCPF(cpf));
+    }
+
 
 }
