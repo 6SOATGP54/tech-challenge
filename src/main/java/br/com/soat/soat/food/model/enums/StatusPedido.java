@@ -1,6 +1,6 @@
 package br.com.soat.soat.food.model.enums;
 
-public enum StatusAcompanhamento {
+public enum StatusPedido {
 
     RECEBIDO,
     PREPARACAO,

@@ -1,9 +1,8 @@
 package br.com.soat.soat.food.controller;
 
 
-import br.com.soat.soat.food.model.Cliente;
 import br.com.soat.soat.food.model.Pedido;
-import br.com.soat.soat.food.model.enums.StatusAcompanhamento;
+import br.com.soat.soat.food.model.enums.StatusPedido;
 import br.com.soat.soat.food.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +42,7 @@ public class PedidoController {
     }
 
 
-    public record  PedidoDTO(Long id, StatusAcompanhamento status) {
+    public record  PedidoDTO(Long id, StatusPedido statusPedido) {
     }
 
     public record PedidosRecebidosDTO(Long id, LocalDateTime dataCadastro, String nomeCliente, List<PedidoController.produtos> produtos) {

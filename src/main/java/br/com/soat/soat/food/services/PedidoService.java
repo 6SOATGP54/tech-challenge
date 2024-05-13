@@ -4,15 +4,14 @@ package br.com.soat.soat.food.services;
 import br.com.soat.soat.food.controller.PedidoController;
 import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.model.PedidoProduto;
-import br.com.soat.soat.food.model.Produto;
-import br.com.soat.soat.food.model.enums.StatusAcompanhamento;
+import br.com.soat.soat.food.model.enums.StatusPedido;
 import br.com.soat.soat.food.repository.PedidoProdutoRepository;
 import br.com.soat.soat.food.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +33,7 @@ public class PedidoService {
 
         Pedido salvarPedido = new Pedido();
         salvarPedido.setCliente(pedido.getCliente());
-        salvarPedido.setAcompanhamento(pedido.getAcompanhamento());
+        salvarPedido.setStatusPedido(pedido.getStatusPedido());
         salvarPedido.setPedidoProdutos(new ArrayList<>());
 
         Pedido pedidoSalvo = pedidoRepository.save(salvarPedido);
@@ -50,7 +49,7 @@ public class PedidoService {
     }
 
     public Pedido atualizarStatusPedido(PedidoController.PedidoDTO pedidoDTO) {
-        pedidoRepository.acompanhamentoPedido(pedidoDTO.status(),pedidoDTO.id());
+        pedidoRepository.statusPedido(pedidoDTO.statusPedido(),pedidoDTO.id());
 
         Optional<Pedido> pedidoAtualizado = pedidoRepository.findById(pedidoDTO.id());
 
@@ -59,6 +58,6 @@ public class PedidoService {
     }
 
     public List<Pedido> pesquisarPedidosRecebidos() {
-        return pedidoRepository.findByAcompanhamento(StatusAcompanhamento.RECEBIDO);
+        return pedidoRepository.findByStatusPedido(StatusPedido.RECEBIDO);
     }
 }
