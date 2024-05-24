@@ -31,7 +31,7 @@ public class PedidoController {
 
     @GetMapping("/pesquisarPedidosRecebidos")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<List<Pedido>> pesquisarPedidosRecebidos() {
+    public ResponseEntity<List<PedidosRecebidosDTO>> pesquisarPedidosRecebidos() {
         return ResponseEntity.ok(pedidoService.pesquisarPedidosRecebidos());
     }
 
@@ -45,10 +45,10 @@ public class PedidoController {
     public record  PedidoDTO(Long id, StatusPedido statusPedido) {
     }
 
-    public record PedidosRecebidosDTO(Long id, LocalDateTime dataCadastro, String nomeCliente, List<PedidoController.produtos> produtos) {
+    public record PedidosRecebidosDTO(Long id, LocalDateTime dataCadastro, String nomeCliente, List<ProdutoDTO> produtos) {
     }
 
-    public record produtos(String nomeProduto, String categoria, String quantidade){
+    public record ProdutoDTO(String nomeProduto, String categoria, String quantidade){
 
     }
 }

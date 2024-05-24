@@ -4,14 +4,12 @@ package br.com.soat.soat.food.services;
 import br.com.soat.soat.food.controller.PedidoController;
 import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.model.PedidoProduto;
-import br.com.soat.soat.food.model.enums.StatusPedido;
 import br.com.soat.soat.food.repository.PedidoProdutoRepository;
 import br.com.soat.soat.food.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +55,7 @@ public class PedidoService {
 
     }
 
-    public List<Pedido> pesquisarPedidosRecebidos() {
-        return pedidoRepository.findByStatusPedido(StatusPedido.RECEBIDO);
+    public List<PedidoController.PedidosRecebidosDTO> pesquisarPedidosRecebidos() {
+        return pedidoProdutoRepository.listaPedidos();
     }
 }
