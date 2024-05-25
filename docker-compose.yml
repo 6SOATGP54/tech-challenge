@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: food
+      POSTGRES_USER: crmm
+      POSTGRES_PASSWORD: redmondpie@BR1
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    restart: always
+
+  app:
+    build: .
+    ports:
+      - "8091:8091"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/food
+      SPRING_DATASOURCE_USERNAME: crmm
+      SPRING_DATASOURCE_PASSWORD: redmondpie@BR1
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  db-data:
