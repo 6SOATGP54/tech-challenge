@@ -91,6 +91,17 @@ Dicionário em linguagem ubíqua:
 - **Status do pedido** se refere ao estado em que o pedido do cliente se encontra, como "recebido", "em preparação", "pronto" e "finalizado".
 - **Tempo de espera do pedido** se refere ao período de tempo estimado entre o momento em que o cliente faz o pedido e o momento em que ele o recebe. 
 
+# Execução do Projeto
+:warning: Necesário possuir Docker instalado. Como super usuário, execute:
+
+```bash
+docker-compose up
+```
+
+A execução do projeto consiste em:
+- 1 instância para o banco de dados
+- 1 instância para a aplicação
+
 # Membros
 Grupo nº 54 da turma 6SOAT/2024 do curso *lato sensu* "Especialização em Arquitetura de Software" composto por:
 - Bruno Matias

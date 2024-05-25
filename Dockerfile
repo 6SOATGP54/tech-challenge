@@ -10,7 +10,6 @@ RUN apk update
 RUN apk add --no-cache git bash openjdk17-jdk maven
 
 # Project's setup
-#USER root
 COPY . /home/tech-challenge
 WORKDIR /home/tech-challenge
 
