@@ -22,4 +22,6 @@ public class Produto extends Entidade {
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
 
+    private String imagem;
+
 }
