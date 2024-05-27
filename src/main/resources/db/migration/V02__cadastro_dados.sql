@@ -4,7 +4,6 @@
 --------------------------------------------------
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -12,7 +11,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    1,
     CURRENT_TIMESTAMP,
     'Clássico Americano',
     'Hambúrguer de carne bovina grelhado, queijo cheddar derretido, alface fresca, tomate suculento, cebola roxa em rodelas e maionese caseira, tudo isso servido em um pão de brioche tostado.',
@@ -22,7 +20,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -30,7 +27,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    2,
     CURRENT_TIMESTAMP,
     'Barbecue Bacon',
     'Hambúrguer de carne bovina com queijo cheddar, bacon crocante, cebola caramelizada, alface, tomate e um generoso molho barbecue, servido em um pão australiano.',
@@ -40,7 +36,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -48,17 +43,14 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    3,
     CURRENT_TIMESTAMP,
     'Cheddar Bacon',
     'Carne bovina grelhada coberta com queijo cheddar cremoso, bacon crocante, cebola roxa, picles e maionese, servido em um pão de hambúrguer clássico.',
-    40,
     'LANCHE',
     'https://raw.githubusercontent.com/6SOATGP54/tech-challenge/main/docs/products-example/OIG3Pqy.jpeg'
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -66,7 +58,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    4,
     CURRENT_TIMESTAMP,
     'Mexicano Picante',
     'Hambúrguer de carne bovina com queijo pepper jack, jalapeños em rodelas, alface, guacamole, molho picante e cebola roxa, servido em um pão de milho levemente tostado.',
@@ -76,7 +67,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -84,7 +74,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    5,
     CURRENT_TIMESTAMP,
     'Veggie Delícia',
     'Hambúrguer vegetariano feito de grão-de-bico, quinoa e temperos, coberto com queijo de cabra, rúcula, tomate seco, pepino em fatias finas e molho de iogurte, servido em um pão integral.',
@@ -94,7 +83,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -102,7 +90,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    6,
     CURRENT_TIMESTAMP,
     'Frango Crocante',
     'Filé de frango empanado e frito, queijo suíço, alface americana, tomate, picles e maionese de ervas, servido em um pão de hambúrguer com gergelim.',
@@ -112,7 +99,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -120,7 +106,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    7,
     CURRENT_TIMESTAMP,
     'Duplo Bacon',
     'Dois hambúrgueres de carne bovina, queijo cheddar derretido, bacon extra crocante, alface, tomate, cebola caramelizada e molho especial, servido em um pão de brioche.',
@@ -130,7 +115,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -138,7 +122,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    8,
     CURRENT_TIMESTAMP,
     'Gourmet Trufado',
     'Hambúrguer de carne wagyu, queijo brie, cogumelos salteados, rúcula, cebola caramelizada e maionese trufada, servido em um pão de brioche.',
@@ -148,7 +131,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -156,7 +138,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    9,
     CURRENT_TIMESTAMP,
     'Picanha Suprema',
     'Hambúrguer de picanha grelhada, queijo provolone, alface americana, tomate, cebola roxa, picles e molho chimichurri, servido em um pão de malte tostado.',
@@ -166,7 +147,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -174,7 +154,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    10,
     CURRENT_TIMESTAMP,
     'Caprese Italiano',
     'Hambúrguer de carne bovina, queijo mussarela de búfala, tomate fresco, manjericão, rúcula e pesto de manjericão, servido em um pão ciabatta.',
@@ -189,7 +168,6 @@ INSERT INTO produto (
 --------------------------------------------------
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -197,7 +175,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    11,
     CURRENT_TIMESTAMP,
     'Limonada Siciliana',
     'Uma refrescante combinação de suco de limão siciliano fresco, água com gás e um toque de hortelã. Servida gelada com rodelas de limão e folhas de hortelã para um sabor cítrico e aromático.',
@@ -207,7 +184,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -215,7 +191,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    12,
     CURRENT_TIMESTAMP,
     'Coca-Cola',
     'O clássico refrigerante de cola, conhecido mundialmente pelo seu sabor inconfundível e refrescante. Servido gelado com gelo e uma fatia de limão para realçar o sabor.',
@@ -225,7 +200,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -233,7 +207,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    13,
     CURRENT_TIMESTAMP,
     'Pepsi',
     'Um refrigerante de cola popular com um sabor doce e marcante. Servido gelado com gelo, é uma alternativa perfeita para quem gosta de uma bebida carbonatada refrescante.',
@@ -243,7 +216,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -251,7 +223,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    14,
     CURRENT_TIMESTAMP,
     'Fanta Laranja',
     'Refrigerante de laranja com sabor vibrante e cítrico. Levemente gaseificado, é uma escolha refrescante e doce, ideal para acompanhar refeições leves e lanches.',
@@ -261,7 +232,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -269,7 +239,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    15,
     CURRENT_TIMESTAMP,
     'Suco de Laranja Natural',
     'Suco de laranja espremido na hora, sem adição de açúcar. Rico em vitamina C e com sabor naturalmente doce e cítrico, é uma opção saudável e refrescante.',
@@ -279,7 +248,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -287,7 +255,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    16,
     CURRENT_TIMESTAMP,
     'Suco de Uva Integral',
     'Suco de uva 100% natural, feito com uvas escuras selecionadas. Rico em antioxidantes, possui um sabor doce e encorpado, sem adição de açúcar ou conservantes.',
@@ -297,7 +264,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -305,7 +271,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    17,
     CURRENT_TIMESTAMP,
     'Chá Gelado de Hibisco e Frutas Vermelhas',
     'Chá de hibisco gelado combinado com uma seleção de frutas vermelhas como morango, framboesa e mirtilo. Levemente adoçado com mel, é uma bebida refrescante e rica em antioxidantes.',
@@ -320,7 +285,6 @@ INSERT INTO produto (
 --------------------------------------------------
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -328,17 +292,14 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    18,
     CURRENT_TIMESTAMP,
     'Brownie de Chocolate com Sorvete',
     'Um brownie de chocolate denso e fudgy, servido quente com uma bola de sorvete de baunilha. Coberto com calda de chocolate e decorado com uma pitada de nozes picadas para um contraste crocante.',
-    16,
     'SOBREMESA',
     'https://raw.githubusercontent.com/6SOATGP54/tech-challenge/main/docs/products-example/OIG298mgv_f541.jpeg'
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -346,7 +307,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    19,
     CURRENT_TIMESTAMP,
     'Torta de Limão',
     'Uma base crocante de biscoito, recheada com um creme de limão suave e azedinho, coberto com merengue dourado. Servida gelada, é uma sobremesa refrescante e perfeita para qualquer momento do dia.',
@@ -356,7 +316,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -364,17 +323,14 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    20,
     CURRENT_TIMESTAMP,
     'Cheesecake de Frutas Vermelhas',
     'Cheesecake cremoso sobre uma base de biscoito amanteigado, coberto com uma calda de frutas vermelhas frescas como morango, framboesa e mirtilo. Servido gelado, é uma combinação perfeita de doce e azedo.',
-    20,
     'SOBREMESA',
     'https://raw.githubusercontent.com/6SOATGP54/tech-challenge/main/docs/products-example/OIG154f84.jpeg'
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -382,7 +338,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    21,
     CURRENT_TIMESTAMP,
     'Petit Gâteau',
     'Um bolinho de chocolate com recheio de chocolate derretido no centro, servido quente com uma bola de sorvete de baunilha. Finalizado com calda de chocolate e uma folha de hortelã para decorar.',
@@ -392,7 +347,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -400,7 +354,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    22,
     CURRENT_TIMESTAMP,
     'Mousse de Maracujá',
     'Mousse leve e aerada feita com suco de maracujá fresco, servida gelada. Decorada com sementes de maracujá e folhas de hortelã, é uma sobremesa refrescante e levemente azeda, perfeita para finalizar uma refeição.',
@@ -415,7 +368,6 @@ INSERT INTO produto (
 --------------------------------------------------
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -423,7 +375,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    23,
     CURRENT_TIMESTAMP,
     'Batata Frita Crocante',
     'Batatas cortadas em palitos finos e fritas até ficarem douradas e crocantes. Servidas quentes e salpicadas com sal grosso, acompanhadas de ketchup e maionese. É o acompanhamento clássico e perfeito para qualquer lanche.',
@@ -433,7 +384,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -441,7 +391,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    24,
     CURRENT_TIMESTAMP,
     'Anéis de Cebola Empanados',
     'Cebolas frescas cortadas em rodelas e empanadas em uma mistura especial de farinha temperada, depois fritas até ficarem crocantes e douradas. Servidos com um molho barbecue ou molho ranch, esses anéis de cebola são uma opção deliciosa e crocante para acompanhar hambúrgueres ou sanduíches.',
@@ -451,7 +400,6 @@ INSERT INTO produto (
 );
 
 INSERT INTO produto (
-    id,
     data_cadastro,
     nome,
     descricao,
@@ -459,7 +407,6 @@ INSERT INTO produto (
     categoria,
     imagem
 ) VALUES (
-    25,
     CURRENT_TIMESTAMP,
     'Salada Coleslaw',
     'Uma salada refrescante e crocante feita com repolho fresco, cenoura ralada e cebola, tudo misturado em um molho cremoso à base de maionese, vinagre e um toque de açúcar. É um acompanhamento leve e saboroso que complementa bem lanches e pratos fritos, adicionando uma textura crocante e um sabor equilibrado.',
