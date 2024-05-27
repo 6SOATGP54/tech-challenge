@@ -3,11 +3,13 @@ package br.com.soat.soat.food.repository.custom;
 import br.com.soat.soat.food.controller.PedidoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PedidoCustomRepositoryImpl implements PedidoCustomRepository {
 
 
