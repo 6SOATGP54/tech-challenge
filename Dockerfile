@@ -17,4 +17,4 @@ WORKDIR /home/tech-challenge
 RUN mvn -DskipTests install
 EXPOSE 8091
 
-CMD ["mvn", "spring-boot:run"]
+CMD ["java", "-jar", "\home\tech-challenge\target\soat-food-0.0.1-SNAPSHOT.jar"]
