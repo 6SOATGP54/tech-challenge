@@ -35,6 +35,18 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoService.pesquisarPedidosRecebidos());
     }
 
+    @GetMapping("/pesquisarPedidosProntos")
+    @ResponseStatus(HttpStatus.FOUND)
+    public ResponseEntity<List<Pedido>> pesquisarPedidosProntos() {
+        return ResponseEntity.ok(pedidoService.pesquisarPedidosProntos());
+    }
+
+    @GetMapping("/pesquisarPedidosEmPreparacao")
+    @ResponseStatus(HttpStatus.FOUND)
+    public ResponseEntity<List<Pedido>> pesquisarPedidosEmPreparacao() {
+        return ResponseEntity.ok(pedidoService.pesquisarPedidosEmPreparacao());
+    }
+
 
     @PutMapping("/atualizarStatusPedido")
     public ResponseEntity<Pedido> atualizarStatusPedido(@Validated @RequestBody PedidoDTO pedidoDTO) {

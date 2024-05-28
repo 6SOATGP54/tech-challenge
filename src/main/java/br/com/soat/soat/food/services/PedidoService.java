@@ -74,4 +74,12 @@ public class PedidoService {
     public List<PedidoController.PedidosRecebidosDTO> pesquisarPedidosRecebidos() {
         return pedidoProdutoRepository.listaPedidos();
     }
+
+    public List<Pedido> pesquisarPedidosProntos() {
+        return pedidoRepository.findByStatusPedido(StatusPedido.PRONTO);
+    }
+
+    public List<Pedido> pesquisarPedidosEmPreparacao() {
+        return pedidoRepository.findByStatusPedido(StatusPedido.PREPARACAO);
+    }
 }
