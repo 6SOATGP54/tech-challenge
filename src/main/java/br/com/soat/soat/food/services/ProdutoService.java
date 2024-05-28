@@ -2,6 +2,7 @@ package br.com.soat.soat.food.services;
 
 import br.com.soat.soat.food.model.Cliente;
 import br.com.soat.soat.food.model.Produto;
+import br.com.soat.soat.food.model.enums.Categoria;
 import br.com.soat.soat.food.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,13 @@ public class ProdutoService {
         }
 
         return this.listarProdutos();
+    }
+
+    public void deletarProduto(Long id) {
+        produtoRepository.deleteById(id);
+    }
+
+    public List<Produto> listarProdutosPorCategoria(Categoria categoria) {
+        return produtoRepository.findByCategoria(categoria);
     }
 }

@@ -20,6 +20,7 @@ public class Produto extends Entidade {
     private BigDecimal preco;
 
     @Enumerated(EnumType.STRING)
+    @OrderBy
     private Categoria categoria;
 
     private String imagem;
