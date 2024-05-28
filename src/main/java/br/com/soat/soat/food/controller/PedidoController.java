@@ -42,7 +42,7 @@ public class PedidoController {
     }
 
 
-    public record  PedidoDTO(Long id, StatusPedido statusPedido) {
+    public record  PedidoDTO(Long id) {
     }
 
     public record PedidosRecebidosDTO(Long id, LocalDateTime dataCadastro, String nomeCliente, List<ProdutoDTO> produtos) {

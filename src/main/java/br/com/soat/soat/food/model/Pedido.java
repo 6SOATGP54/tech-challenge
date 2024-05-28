@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
 @Entity
 @Table(name = "pedido")
 @EqualsAndHashCode(callSuper=false)
@@ -21,4 +20,33 @@ public class Pedido extends Entidade {
 
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
+
+    public Long getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Long cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<PedidoProduto> getPedidoProdutos() {
+        return pedidoProdutos;
+    }
+
+    public void setPedidoProdutos(List<PedidoProduto> pedidoProdutos) {
+        this.pedidoProdutos = pedidoProdutos;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+
+    @PrePersist
+    public void setRecebido() {
+        setStatusPedido(StatusPedido.RECEBIDO);
+    }
 }

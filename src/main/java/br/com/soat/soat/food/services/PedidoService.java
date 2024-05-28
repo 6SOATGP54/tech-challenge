@@ -4,6 +4,7 @@ package br.com.soat.soat.food.services;
 import br.com.soat.soat.food.controller.PedidoController;
 import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.model.PedidoProduto;
+import br.com.soat.soat.food.model.enums.StatusPedido;
 import br.com.soat.soat.food.repository.PedidoProdutoRepository;
 import br.com.soat.soat.food.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,27 @@ public class PedidoService {
     }
 
     public Pedido atualizarStatusPedido(PedidoController.PedidoDTO pedidoDTO) {
-        pedidoRepository.statusPedido(pedidoDTO.statusPedido(),pedidoDTO.id());
+        Optional<Pedido> pedidoEncontrado = pedidoRepository.findById(pedidoDTO.id());
+        int pedidoAtualizado = 0;
 
-        Optional<Pedido> pedidoAtualizado = pedidoRepository.findById(pedidoDTO.id());
+        if (pedidoEncontrado.isPresent()) {
+            StatusPedido statusPedido = pedidoEncontrado.get().getStatusPedido();
+            switch (statusPedido) {
+                case RECEBIDO:
+                    pedidoEncontrado.get().setStatusPedido(StatusPedido.PREPARACAO);
+                    break;
+                case PREPARACAO:
+                    pedidoEncontrado.get().setStatusPedido(StatusPedido.PRONTO);
+                    break;
+                case PRONTO:
+                    pedidoEncontrado.get().setStatusPedido(StatusPedido.FINALIZADO);
+                    break;
+            }
 
-        return pedidoAtualizado.orElse(null);
+            pedidoAtualizado = pedidoRepository.statusPedido(pedidoEncontrado.get().getStatusPedido(), pedidoEncontrado.get().getId());
+        }
 
+        return pedidoAtualizado == 0 ? new Pedido() : pedidoEncontrado.get();
     }
 
     public List<PedidoController.PedidosRecebidosDTO> pesquisarPedidosRecebidos() {
