@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -51,7 +52,10 @@ public class ProdutoService {
     }
 
     public void deletarProduto(Long id) {
-        produtoRepository.deleteById(id);
+        Optional<Produto> produto = produtoRepository.findById(id);
+        if (produto.isPresent()) {
+            produtoRepository.deleteById(id);
+        }
     }
 
     public List<Produto> listarProdutosPorCategoria(Categoria categoria) {
