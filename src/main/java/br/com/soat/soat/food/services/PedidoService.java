@@ -72,7 +72,7 @@ public class PedidoService {
     }
 
     public List<PedidoController.PedidosRecebidosDTO> pesquisarPedidosRecebidos() {
-        return pedidoProdutoRepository.listaPedidos();
+        return pedidoProdutoRepository.pesquisarPedidosRecebidos();
     }
 
     public List<Pedido> pesquisarPedidosProntos() {
@@ -81,5 +81,9 @@ public class PedidoService {
 
     public List<Pedido> pesquisarPedidosEmPreparacao() {
         return pedidoRepository.findByStatusPedido(StatusPedido.PREPARACAO);
+    }
+
+    public List<PedidoController.PedidosEmAbertoDTO> pesquiserPedidosEmAberto() {
+        return pedidoProdutoRepository.pesquisarPedidosEmAberto();
     }
 }
