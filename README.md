@@ -95,7 +95,7 @@ Dicionário em linguagem ubíqua:
 :warning: Necesário possuir [Docker](https://www.docker.com/) instalado. Como super usuário, execute:
 
 ```bash
-docker-compose up
+docker-compose --env-file .develop.env up
 ```
 
 A execução do projeto consiste em:
