@@ -46,6 +46,7 @@ INSERT INTO produto (
     CURRENT_TIMESTAMP,
     'Cheddar Bacon',
     'Carne bovina grelhada coberta com queijo cheddar cremoso, bacon crocante, cebola roxa, picles e maionese, servido em um pão de hambúrguer clássico.',
+    34.4,
     'LANCHE',
     'https://raw.githubusercontent.com/6SOATGP54/tech-challenge/main/docs/products-example/OIG3Pqy.jpeg'
 );
@@ -295,6 +296,7 @@ INSERT INTO produto (
     CURRENT_TIMESTAMP,
     'Brownie de Chocolate com Sorvete',
     'Um brownie de chocolate denso e fudgy, servido quente com uma bola de sorvete de baunilha. Coberto com calda de chocolate e decorado com uma pitada de nozes picadas para um contraste crocante.',
+    17.8,
     'SOBREMESA',
     'https://raw.githubusercontent.com/6SOATGP54/tech-challenge/main/docs/products-example/OIG298mgv_f541.jpeg'
 );
@@ -326,6 +328,7 @@ INSERT INTO produto (
     CURRENT_TIMESTAMP,
     'Cheesecake de Frutas Vermelhas',
     'Cheesecake cremoso sobre uma base de biscoito amanteigado, coberto com uma calda de frutas vermelhas frescas como morango, framboesa e mirtilo. Servido gelado, é uma combinação perfeita de doce e azedo.',
+    20.15,
     'SOBREMESA',
     'https://raw.githubusercontent.com/6SOATGP54/tech-challenge/main/docs/products-example/OIG154f84.jpeg'
 );
