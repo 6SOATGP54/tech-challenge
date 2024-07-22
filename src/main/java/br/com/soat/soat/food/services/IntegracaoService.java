@@ -1,5 +1,8 @@
 package br.com.soat.soat.food.services;
 
+import br.com.soat.soat.food.dtos.CaixaDTO;
+import br.com.soat.soat.food.dtos.EscopoLojaMercadoPagoDTO;
+import br.com.soat.soat.food.dtos.IntervalosDTO;
 import br.com.soat.soat.food.enums.EndpointsIntegracaoEnum;
 import br.com.soat.soat.food.model.CredenciaisAcesso;
 import br.com.soat.soat.food.model.EscopoCaixaMercadoPago;
@@ -9,13 +12,10 @@ import br.com.soat.soat.food.model.embeddable.Location;
 import br.com.soat.soat.food.repository.integracoes.CaixaMercadoPagoRepository;
 import br.com.soat.soat.food.repository.integracoes.CredenciaisIntegracaoRepository;
 import br.com.soat.soat.food.repository.integracoes.LojaMercadoLivreRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,9 +38,7 @@ public class IntegracaoService {
 
     public EscopoLojaMercadoPago cadastroLojaMercadoLivre(EscopoLojaMercadoPago escopoLojaMercadoPago) {
 
-        EscopoLojaMercadoPago save = lojaMercadoLivreRepository.save(escopoLojaMercadoPago);
-
-        Optional<EscopoLojaMercadoPagoDTO> escopoLojaMercadoPagoDTO = getEscopoLojaMercadoPagoDTO(save);
+        EscopoLojaMercadoPagoDTO escopoLojaMercadoPagoDTO = entityTODTO(escopoLojaMercadoPago);
 
         CredenciaisAcesso credenciaisAcesso = getCredenciaisAcesso(escopoLojaMercadoPago);
 
@@ -52,22 +50,27 @@ public class IntegracaoService {
 
     private EscopoLojaMercadoPago publicarLojaMercadoPago(EscopoLojaMercadoPago escopoLojaMercadoPago,
                                                           CredenciaisAcesso credenciaisAcesso,
-                                                          Optional<EscopoLojaMercadoPagoDTO> escopoLojaMercadoPagoDTO) {
+                                                          EscopoLojaMercadoPagoDTO escopoLojaMercadoPagoDTO) {
 
         Map<Object, Object> parametros = Map.of("usuario_acesso", credenciaisAcesso.getUsuario());
 
         String urlCriarLoja = EndpointsIntegracaoEnum.CRIAR_LOJA.parametrosUrl(parametros);
 
         Object o =
-                RequestServices.criarLoja(escopoLojaMercadoPagoDTO.orElse(null),
+                RequestServices.criarLoja(escopoLojaMercadoPagoDTO,
                         credenciaisAcesso,
                         urlCriarLoja,
-                        HttpMethod.POST,EndpointsIntegracaoEnum.CRIAR_LOJA);
+                        HttpMethod.POST,
+                        EndpointsIntegracaoEnum.CRIAR_LOJA);
 
 
         escopoLojaMercadoPago.setUserId(o instanceof Long ? (Long) o : 0L);
 
-        return lojaMercadoLivreRepository.save(escopoLojaMercadoPago);
+        if(escopoLojaMercadoPago.getUserId() != null){
+           return  lojaMercadoLivreRepository.save(escopoLojaMercadoPago);
+        }
+
+        return new EscopoLojaMercadoPago();
     }
 
     private CredenciaisAcesso getCredenciaisAcesso(EscopoLojaMercadoPago escopoLojaMercadoPago) {
@@ -79,35 +82,23 @@ public class IntegracaoService {
         return credenciaisAcesso;
     }
 
-    private Optional<EscopoLojaMercadoPagoDTO> getEscopoLojaMercadoPagoDTO(EscopoLojaMercadoPago save) {
 
-        List<EscopoLojaMercadoPagoDTO> escopoLojaMercadoPagoDTOS = buscarLojaMercadoPago();
+    public EscopoLojaMercadoPagoDTO entityTODTO(EscopoLojaMercadoPago escopoLojaMercadoPago) {
 
-        Optional<EscopoLojaMercadoPagoDTO> escopoLojaMercadoPagoDTO = escopoLojaMercadoPagoDTOS.stream()
-                .filter(e -> e.externalId().equals(save.getExternalId()))
-                .findFirst();
-        return escopoLojaMercadoPagoDTO;
-    }
+        Map<Object, Object> businessHours = escopoLojaMercadoPago.getBusinessHours().stream()
+                .collect(Collectors.toMap(DiaDaSemana::getDia,
+                        diaDaSemana -> diaDaSemana.getIntervalos().stream()
+                                .map(i -> new IntervalosDTO(i.getOpen(), i.getClose()))
+                                .collect(Collectors.toList())));
 
-    public List<EscopoLojaMercadoPagoDTO> buscarLojaMercadoPago() {
-        List<EscopoLojaMercadoPago> all = lojaMercadoLivreRepository.findAll();
+        Map<Object, Object> location = getLocation(escopoLojaMercadoPago);
 
-        return all.stream().map(escopoLojaMercadoPago -> {
-                Map<Object, Object> businessHours = escopoLojaMercadoPago.getBusinessHours().stream()
-                        .collect(Collectors.toMap(DiaDaSemana::getDia,
-                                diaDaSemana -> diaDaSemana.getIntervalos().stream()
-                                        .map(i -> new IntervalosDTO(i.getOpen(), i.getClose()))
-                                        .collect(Collectors.toList())));
 
-                Map<Object, Object> location = getLocation(escopoLojaMercadoPago);
-
-                return new EscopoLojaMercadoPagoDTO(
-                        escopoLojaMercadoPago.getName(),
-                        businessHours,
-                        location,
-                        escopoLojaMercadoPago.getExternalId()
-                );
-            }).collect(Collectors.toList());
+    return  new EscopoLojaMercadoPagoDTO(
+                escopoLojaMercadoPago.getName(),
+                businessHours,
+                location,
+                escopoLojaMercadoPago.getExternalId());
 
     }
 
@@ -130,23 +121,15 @@ public class IntegracaoService {
         EscopoLojaMercadoPago loja = lojaMercadoLivreRepository
                 .findByUserId(caixa.getStore_id());
 
+        caixa.setExternal_store_id(loja.getExternalId());
+        caixa.setStore_id(loja.getUserId());
 
-        EscopoCaixaMercadoPago caixaMercadoPagoToDB =
-                EscopoCaixaMercadoPago.builder()
-                        .external_id(caixa.getExternal_id())
-                        .external_store_id(loja.getExternalId())
-                        .name(caixa.getName())
-                        .store_id(loja.getUserId()).build();
-
-        EscopoCaixaMercadoPago save = caixaMercadoPagoRepository.save(caixaMercadoPagoToDB);
-
-        CaixaLojaDTO caixaLojaDTO = new CaixaLojaDTO(save.getCategory(),
-                save.getExternal_id(),
-                save.getExternal_store_id(),
-                save.getFixed_amount(),
-                save.getName(),
-                save.getStore_id());
-
+        CaixaDTO caixaLojaDTO = new CaixaDTO(caixa.getCategory(),
+                caixa.getExternal_id(),
+                caixa.getExternal_store_id(),
+                caixa.getFixed_amount(),
+                caixa.getName(),
+                caixa.getStore_id());
 
         CredenciaisAcesso credenciaisAcesso = getCredenciaisAcesso(loja);
 
@@ -158,25 +141,13 @@ public class IntegracaoService {
                         url,
                         HttpMethod.POST,EndpointsIntegracaoEnum.CRIAR_CAIXA);
 
-        save.setIdAPI(o instanceof Long ? (Long) o : 0L);
+        caixa.setIdAPI(o instanceof Long ? (Long) o : 0L);
 
-        return caixaMercadoPagoRepository.save(save);
-    }
+        if(caixa.getIdAPI() != null){
+            caixaMercadoPagoRepository.save(caixa);
+        }
 
-    public record EscopoLojaMercadoPagoDTO(String name,
-                                           @JsonProperty("business_hours") Map<Object, Object> businessHours,
-                                           Map<Object, Object> location,
-                                           @JsonProperty("external_id") String externalId) {
-    }
-
-    private record IntervalosDTO(@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm") LocalTime open,
-                                 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm") LocalTime close) {
-    }
-
-
-    public record CaixaLojaDTO(Long category, String external_id, String external_store_id, Boolean fixed_amount,
-                               String name, Long store_id) {
-
+        return new EscopoCaixaMercadoPago();
     }
 
 

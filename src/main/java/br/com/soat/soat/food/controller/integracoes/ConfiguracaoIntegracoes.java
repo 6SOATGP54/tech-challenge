@@ -36,13 +36,6 @@ public class ConfiguracaoIntegracoes {
         return ResponseEntity.ok(integracaoService.cadastroLojaMercadoLivre(escopoLojaMercadoPago));
     }
 
-    @Operation(summary = "Buscar todas as lojas cadastradas")
-    @GetMapping("/buscarLojasMercadoPago")
-    @ResponseStatus(HttpStatus.FOUND)
-    public ResponseEntity<List<IntegracaoService.EscopoLojaMercadoPagoDTO>> buscarLojaMercadoLivre() {
-        return ResponseEntity.ok(integracaoService.buscarLojaMercadoPago());
-    }
-
     @Operation(summary = "Cadastrar caixa",
         description = "No body NÃO é necessario ID e DATA CADASTRO é criado automaticamente pelo sistema." +
                        "store_id: Id da loja")
