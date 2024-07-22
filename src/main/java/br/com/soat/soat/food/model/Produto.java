@@ -1,7 +1,7 @@
 package br.com.soat.soat.food.model;
 
 
-import br.com.soat.soat.food.model.enums.Categoria;
+import br.com.soat.soat.food.enums.Categoria;
 import jakarta.persistence.*;
 import lombok.*;
 

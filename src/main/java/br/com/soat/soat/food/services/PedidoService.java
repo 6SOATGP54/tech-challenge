@@ -4,7 +4,7 @@ package br.com.soat.soat.food.services;
 import br.com.soat.soat.food.controller.PedidoController;
 import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.model.PedidoProduto;
-import br.com.soat.soat.food.model.enums.StatusPedido;
+import br.com.soat.soat.food.enums.StatusPedido;
 import br.com.soat.soat.food.repository.PedidoProdutoRepository;
 import br.com.soat.soat.food.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

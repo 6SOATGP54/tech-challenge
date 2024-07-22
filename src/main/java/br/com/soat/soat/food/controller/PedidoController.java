@@ -2,7 +2,7 @@ package br.com.soat.soat.food.controller;
 
 
 import br.com.soat.soat.food.model.Pedido;
-import br.com.soat.soat.food.model.enums.StatusPedido;
+import br.com.soat.soat.food.enums.StatusPedido;
 import br.com.soat.soat.food.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

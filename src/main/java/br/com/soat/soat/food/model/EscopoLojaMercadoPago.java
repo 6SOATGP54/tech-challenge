@@ -3,19 +3,16 @@ package br.com.soat.soat.food.model;
 import br.com.soat.soat.food.model.embeddable.DiaDaSemana;
 import br.com.soat.soat.food.model.embeddable.Location;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@ToString
 public class EscopoLojaMercadoPago extends Entidade{
 
     private String name;
@@ -33,9 +30,12 @@ public class EscopoLojaMercadoPago extends Entidade{
     @Embedded
     private Location location;
 
+    @Column(unique = true)
     private String externalId;
 
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long userId;
 
+    private Long credenciaisId;
 
 }

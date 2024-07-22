@@ -1,6 +1,6 @@
 package br.com.soat.soat.food.model;
 
-import br.com.soat.soat.food.model.enums.StatusPedido;
+import br.com.soat.soat.food.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.*;
 

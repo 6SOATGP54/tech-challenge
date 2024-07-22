@@ -16,6 +16,8 @@ public abstract class Entidade {
 
     private LocalDateTime dataCadastro;
 
+    protected void prePersistSubClasses() {}
+
     public Long getId() {
         return id;
     }
@@ -35,6 +37,7 @@ public abstract class Entidade {
     @PrePersist
     public void setarDataCadastro(){
         this.setDataCadastro(LocalDateTime.now());
+        prePersistSubClasses();
     }
 
 }

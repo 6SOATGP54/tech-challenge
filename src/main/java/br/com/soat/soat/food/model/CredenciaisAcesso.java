@@ -1,6 +1,6 @@
 package br.com.soat.soat.food.model;
 
-import br.com.soat.soat.food.model.enums.ServicosIntegracao;
+import br.com.soat.soat.food.enums.ServicosIntegracao;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,8 +1,10 @@
 package br.com.soat.soat.food.controller.integracoes;
 
 import br.com.soat.soat.food.model.CredenciaisAcesso;
+import br.com.soat.soat.food.model.EscopoCaixaMercadoPago;
 import br.com.soat.soat.food.model.EscopoLojaMercadoPago;
 import br.com.soat.soat.food.services.IntegracaoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,28 +14,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/integracoes")
+@RequestMapping("/integracoes/mercadoPago")
 public class ConfiguracaoIntegracoes {
 
     @Autowired
     IntegracaoService integracaoService;
 
+    @Operation(summary = "Cadastrar credenciais",
+            description = "Passar USER_ID e TOKEN fornecidos na plataforma do mercado pago")
     @PostMapping("/cadastroCredenciais")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Boolean> cadastroCredenciais(@Validated @RequestBody CredenciaisAcesso credenciaisAcesso) {
         return ResponseEntity.ok(integracaoService.cadastroCredenciais(credenciaisAcesso));
     }
 
-    @PostMapping("/cadastroLojaMercadoLivre")
+    @Operation(summary = "Cadastrar loja",
+            description = "No body NÃO é necessario ID e DATA CADASTRO é criado automaticamente pelo sistema")
+    @PostMapping("/cadastroLojaMercadoPago")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<EscopoLojaMercadoPago> cadastroLojaMercadoLivre(@Validated @RequestBody EscopoLojaMercadoPago escopoLojaMercadoPago) {
         return ResponseEntity.ok(integracaoService.cadastroLojaMercadoLivre(escopoLojaMercadoPago));
     }
 
-    @PostMapping("/buscarLojaMercadoLivre")
-    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Buscar todas as lojas cadastradas")
+    @GetMapping("/buscarLojasMercadoPago")
+    @ResponseStatus(HttpStatus.FOUND)
     public ResponseEntity<List<IntegracaoService.EscopoLojaMercadoPagoDTO>> buscarLojaMercadoLivre() {
-        return ResponseEntity.ok(integracaoService.buscarLojaMercadoLivre());
+        return ResponseEntity.ok(integracaoService.buscarLojaMercadoPago());
+    }
+
+    @Operation(summary = "Cadastrar caixa",
+        description = "No body NÃO é necessario ID e DATA CADASTRO é criado automaticamente pelo sistema." +
+                       "store_id: Id da loja")
+    @PostMapping("/cadastrarCaixaLojaMercadoLivre")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<EscopoCaixaMercadoPago> cadastrarCaixaLojaMercadoLivre(@Validated @RequestBody
+                                                                                     EscopoCaixaMercadoPago escopoCaixaMercadoPago) {
+        return ResponseEntity.ok(integracaoService.cadastrarCaixaLojaMercadoLivre(escopoCaixaMercadoPago));
     }
 
 

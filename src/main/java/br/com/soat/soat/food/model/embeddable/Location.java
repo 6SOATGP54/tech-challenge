@@ -12,11 +12,17 @@ import lombok.NoArgsConstructor;
 public class Location {
 
     private String streetNumber;
+
     private String streetName;
+
     private String cityName;
+
     private String stateName;
+
     private double latitude;
+
     private double longitude;
+
     private String reference;
 
 }

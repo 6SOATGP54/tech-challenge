@@ -1,7 +1,7 @@
 package br.com.soat.soat.food.repository.custom;
 
 import br.com.soat.soat.food.controller.PedidoController;
-import br.com.soat.soat.food.model.enums.StatusPedido;
+import br.com.soat.soat.food.enums.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

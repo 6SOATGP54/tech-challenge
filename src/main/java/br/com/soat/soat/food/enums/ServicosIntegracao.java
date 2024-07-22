@@ -1,4 +1,4 @@
-package br.com.soat.soat.food.model.enums;
+package br.com.soat.soat.food.enums;
 
 public enum ServicosIntegracao {
 
