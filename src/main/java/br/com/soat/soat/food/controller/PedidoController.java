@@ -1,8 +1,8 @@
 package br.com.soat.soat.food.controller;
 
 
-import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.enums.StatusPedido;
+import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class PedidoController {
 
     @PostMapping("/cadastroPedido")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Pedido> insertOrUpdateSala(@Validated @RequestBody Pedido pedido) {
+    public ResponseEntity<String> insertOrUpdateSala(@Validated @RequestBody Pedido pedido) {
         return ResponseEntity.ok(pedidoService.cadastroEupdatePedido(pedido));
     }
 

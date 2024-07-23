@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/integracoes/mercadoPago")
 public class ConfiguracaoIntegracoes {
@@ -45,6 +43,17 @@ public class ConfiguracaoIntegracoes {
                                                                                      EscopoCaixaMercadoPago escopoCaixaMercadoPago) {
         return ResponseEntity.ok(integracaoService.cadastrarCaixaLojaMercadoLivre(escopoCaixaMercadoPago));
     }
+
+    @PostMapping("/pagamentoRecebido")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void cadastrarCaixaLojaMercadoLivre(@RequestParam("id") Object id,
+                                                                 @RequestParam("topic") Object type) {
+        integracaoService.consultarPagamento(id,type);
+
+    }
+
+
+
 
 
 }

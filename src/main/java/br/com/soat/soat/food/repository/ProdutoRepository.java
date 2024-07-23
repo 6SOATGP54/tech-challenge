@@ -1,7 +1,7 @@
 package br.com.soat.soat.food.repository;
 
-import br.com.soat.soat.food.model.Produto;
 import br.com.soat.soat.food.enums.Categoria;
+import br.com.soat.soat.food.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

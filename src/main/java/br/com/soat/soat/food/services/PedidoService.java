@@ -2,49 +2,110 @@ package br.com.soat.soat.food.services;
 
 
 import br.com.soat.soat.food.controller.PedidoController;
-import br.com.soat.soat.food.model.Pedido;
-import br.com.soat.soat.food.model.PedidoProduto;
+import br.com.soat.soat.food.dtos.ItemOrdemVendaDTO;
+import br.com.soat.soat.food.dtos.OrdemVendaMercadoPagoDTO;
+import br.com.soat.soat.food.enums.EndpointsIntegracaoEnum;
 import br.com.soat.soat.food.enums.StatusPedido;
+import br.com.soat.soat.food.model.CredenciaisAcesso;
+import br.com.soat.soat.food.model.EscopoCaixaMercadoPago;
+import br.com.soat.soat.food.model.Pedido;
+import br.com.soat.soat.food.model.Produto;
 import br.com.soat.soat.food.repository.PedidoProdutoRepository;
 import br.com.soat.soat.food.repository.PedidoRepository;
+import br.com.soat.soat.food.repository.integracoes.CaixaMercadoPagoRepository;
+import br.com.soat.soat.food.repository.integracoes.CredenciaisIntegracaoRepository;
+import br.com.soat.soat.food.repository.integracoes.LojaMercadoLivreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 public class PedidoService {
 
+    public static final String PATH_WEBHOOK = "/api/integracoes/mercadoPago/pagamentoRecebido";
     @Autowired
     PedidoRepository pedidoRepository;
 
     @Autowired
     PedidoProdutoRepository pedidoProdutoRepository;
 
-    public Pedido cadastroEupdatePedido(Pedido pedido) {
-        List<PedidoProduto> listaItens = new ArrayList<>();
+    @Autowired
+    ProdutoService produtoService;
 
-        for (PedidoProduto produto : pedido.getPedidoProdutos()) {
-            listaItens.add(produto);
+    @Autowired
+    CredenciaisIntegracaoRepository credenciaisIntegracaoRepository;
+
+    @Autowired
+    RedisService redisService;
+
+    @Autowired
+    CaixaMercadoPagoRepository caixaMercadoPagoRepository;
+
+    public String cadastroEupdatePedido(Pedido pedido) {
+
+        List<Produto> produtos = produtoService.listarProdutos();
+
+        CredenciaisAcesso credenciaisAcesso = credenciaisIntegracaoRepository
+                .findById(pedido.getCredencialId())
+                .orElse(null);
+        EscopoCaixaMercadoPago escopoCaixaMercadoPago = caixaMercadoPagoRepository
+                .findById(pedido.getCredencialId())
+                .orElse(new EscopoCaixaMercadoPago());
+
+        List<ItemOrdemVendaDTO> itemOrdemVendaDTOS = new ArrayList<>();
+
+        pedido.getPedidoProdutos().forEach(i -> {
+            produtos.stream().filter(p -> i.getProduto().equals(p.getId())).findFirst().ifPresent(s -> {
+                itemOrdemVendaDTOS.add(new ItemOrdemVendaDTO(
+                        null,
+                        s.getCategoria(),
+                        s.getNome(),
+                        s.getDescricao(),
+                        s.getPreco(),
+                        i.getQuantidade(),
+                        "unit",
+                        s.getPreco().multiply(BigDecimal.valueOf(i.getQuantidade()))));
+            });
+        });
+
+        BigDecimal total = itemOrdemVendaDTOS.stream()
+                .map(ItemOrdemVendaDTO::total_amount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        String identificacaoPedido = UUID.randomUUID().toString();
+
+        OrdemVendaMercadoPagoDTO ordemVendaMercadoPagoDTO = new OrdemVendaMercadoPagoDTO("Pedido " + identificacaoPedido,
+                identificacaoPedido,
+                itemOrdemVendaDTOS,
+                "Pedido " + identificacaoPedido,
+                total,
+                credenciaisAcesso.getWebHook().concat(PATH_WEBHOOK));
+
+
+
+        if (credenciaisAcesso != null) {
+            Map<Object, Object> parametros = new HashMap<>();
+
+            parametros.put("user_id", credenciaisAcesso.getUsuario());
+            parametros.put("external_pos_id", escopoCaixaMercadoPago.getExternal_id());
+            String url = EndpointsIntegracaoEnum.GERARQRCODE.parametrosUrl(parametros);
+
+            Object o = RequestServices.requestToMercadoPago(ordemVendaMercadoPagoDTO,
+                    credenciaisAcesso,
+                    url,
+                    HttpMethod.POST,
+                    EndpointsIntegracaoEnum.GERARQRCODE);
+
+            if(o != null){
+                redisService.save(identificacaoPedido,pedido);
+                return (String) o;
+            }
         }
 
-        Pedido salvarPedido = new Pedido();
-        salvarPedido.setCliente(pedido.getCliente());
-        salvarPedido.setStatusPedido(pedido.getStatusPedido());
-        salvarPedido.setPedidoProdutos(new ArrayList<>());
-
-        Pedido pedidoSalvo = pedidoRepository.save(salvarPedido);
-
-        for (PedidoProduto itens : listaItens) {
-            itens.setPedido(pedidoSalvo.getId());
-            pedidoProdutoRepository.save(itens);
-        }
-
-        pedidoSalvo.setPedidoProdutos(listaItens);
-
-        return  pedidoSalvo;
+        return null;
     }
 
     public Pedido atualizarStatusPedido(PedidoController.PedidoDTO pedidoDTO) {

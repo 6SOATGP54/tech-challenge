@@ -5,9 +5,11 @@ import lombok.Getter;
 import java.util.Map;
 
 public enum EndpointsIntegracaoEnum {
+
     CRIAR_LOJA("https://api.mercadopago.com/users/{usuario_acesso}/stores"),
     CRIAR_CAIXA("https://api.mercadopago.com/pos"),
-    GERARQRCODE("https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs");
+    GERARQRCODE("https://api.mercadopago.com/instore/orders/qr/seller/collectors/{user_id}/pos/{external_pos_id}/qrs"),
+    CONSULTAR_PAGAMENTO("https://api.mercadopago.com/v1/payments/{id}");
 
     @Getter
     private final String url;

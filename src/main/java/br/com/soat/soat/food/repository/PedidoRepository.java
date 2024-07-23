@@ -1,7 +1,7 @@
 package br.com.soat.soat.food.repository;
 
-import br.com.soat.soat.food.model.Pedido;
 import br.com.soat.soat.food.enums.StatusPedido;
+import br.com.soat.soat.food.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

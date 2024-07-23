@@ -26,4 +26,6 @@ public class CredenciaisAcesso extends Entidade{
     @Column(unique = true)
     private String usuario;
 
+    private String webHook;
+
 }

@@ -3,7 +3,8 @@ package br.com.soat.soat.food.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity

@@ -1,6 +1,5 @@
 package br.com.soat.soat.food.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;

@@ -2,9 +2,7 @@ package br.com.soat.soat.food.model;
 
 
 import jakarta.persistence.*;
-import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass

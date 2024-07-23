@@ -1,8 +1,8 @@
 package br.com.soat.soat.food.services;
 
+import br.com.soat.soat.food.enums.Categoria;
 import br.com.soat.soat.food.model.Cliente;
 import br.com.soat.soat.food.model.Produto;
-import br.com.soat.soat.food.enums.Categoria;
 import br.com.soat.soat.food.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

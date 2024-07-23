@@ -1,8 +1,10 @@
 package br.com.soat.soat.food.model;
 
 import br.com.soat.soat.food.enums.StatusPedido;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,42 +13,21 @@ import java.util.List;
 @Entity
 @Table(name = "pedido")
 @EqualsAndHashCode(callSuper=false)
+@Data
 public class Pedido extends Entidade {
 
     private Long cliente;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<PedidoProduto> pedidoProdutos = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
 
-    public Long getCliente() {
-        return cliente;
-    }
+    @Transient
+    private Long credencialId;
 
-    public void setCliente(Long cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<PedidoProduto> getPedidoProdutos() {
-        return pedidoProdutos;
-    }
-
-    public void setPedidoProdutos(List<PedidoProduto> pedidoProdutos) {
-        this.pedidoProdutos = pedidoProdutos;
-    }
-
-    public StatusPedido getStatusPedido() {
-        return statusPedido;
-    }
-
-    public void setStatusPedido(StatusPedido statusPedido) {
-        this.statusPedido = statusPedido;
-    }
-
-    @PrePersist
-    public void setRecebido() {
-        setStatusPedido(StatusPedido.RECEBIDO);
-    }
+    @Transient
+    private Long caixaId;
 }

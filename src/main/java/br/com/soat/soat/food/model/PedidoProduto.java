@@ -1,9 +1,9 @@
 package br.com.soat.soat.food.model;
 
-import br.com.soat.soat.food.services.PedidoService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
@@ -11,8 +11,11 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class PedidoProduto extends Entidade {
 
-    @Column(name = "pedido_id")
-    private Long pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    @JsonBackReference
+    private Pedido pedido;
 
     @Column(name = "produto_id")
     private Long produto;
