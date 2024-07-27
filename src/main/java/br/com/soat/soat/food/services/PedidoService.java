@@ -84,7 +84,7 @@ public class PedidoService {
                 total,
                 credenciaisAcesso.getWebHook().concat(PATH_WEBHOOK));
 
-
+        pedido.setReferencia(identificacaoPedido);
 
         if (credenciaisAcesso != null) {
             Map<Object, Object> parametros = new HashMap<>();
