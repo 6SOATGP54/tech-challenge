@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-food
+  name: app-food
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-db
+      app: app-food-selector
   template:
     metadata:
       labels:
-        app: postgres-db
+        app: app-food-selector
     spec:
       containers:
       - name: postgres-db
@@ -33,6 +33,19 @@ spec:
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
+      - name: redis
+        image: redis:alpine
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redis-storage
+          mountPath: /data
+      - name: app-food
+        image: brunomatiasdev/tech-challenge-repo:latest
+        ports:
+        - containerPort: 8091
       volumes:
       - name: postgres-storage
-        
+      - name: redis-storage
+        emptyDir: {}
+      

@@ -4,7 +4,7 @@ metadata:
   name: postgres-food-service
 spec:
   selector:
-    app: postgres-db
+    app: app-food-selector
   ports:
     - protocol: TCP
       port: 5432
