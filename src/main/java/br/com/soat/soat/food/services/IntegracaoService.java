@@ -196,7 +196,9 @@ public class IntegracaoService {
 
             Pedido pedido = objectMapper.convertValue(encontrado, Pedido.class);
             pedido.setStatusPedido(StatusPedido.RECEBIDO);
+            pedido.setPagamento(status);
             pedidoRepository.save(pedido);
+            redisService.delete(externalReference);
         }
     }
 }

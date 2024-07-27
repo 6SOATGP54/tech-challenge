@@ -25,6 +25,10 @@ public class Pedido extends Entidade {
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
 
+    private String referencia;
+
+    private String pagamento;
+
     @Transient
     private Long credencialId;
 

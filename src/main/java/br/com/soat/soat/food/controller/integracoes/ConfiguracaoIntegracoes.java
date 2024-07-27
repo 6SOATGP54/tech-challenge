@@ -47,9 +47,8 @@ public class ConfiguracaoIntegracoes {
     @PostMapping("/pagamentoRecebido")
     @ResponseStatus(HttpStatus.CREATED)
     public void cadastrarCaixaLojaMercadoLivre(@RequestParam("id") Object id,
-                                                                 @RequestParam("topic") Object type) {
+                                               @RequestParam("topic") Object type) {
         integracaoService.consultarPagamento(id,type);
-
     }
 
 
