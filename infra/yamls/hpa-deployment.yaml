@@ -6,7 +6,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: app-food
+    name: app-food-deployment
   minReplicas: 2
   maxReplicas: 3
   metrics:

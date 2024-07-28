@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-food
+  name: app-food-deployment
 spec:
   replicas: 1
   selector:
