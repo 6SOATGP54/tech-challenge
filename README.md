@@ -138,10 +138,12 @@ Primeiro conecte-se a um cluster de sua preferência:
   * Minicube (recomendamos para usuários Linux)
 
 
-Execute:
+Execute (em ambiente Linux):
 ```
 ./start-cluster.sh
 ```
+
+Para ambientes Windows você pode usar o script `./start-cluster.bat`.
 
 Após a aplicação subir, acesse seu endereço para visualizar a API via Swagger:
 * local: http://localhost:8091/api/swagger-ui/index.html
