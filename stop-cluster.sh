@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if kubectl -v &> /dev/null
+if command -v kubectl &> /dev/null
 then
 	echo "Stopping cluster..."
 else
