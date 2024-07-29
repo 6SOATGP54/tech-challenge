@@ -100,11 +100,11 @@ Dicionário em linguagem ubíqua:
 **Descrição detalhada**:
 * Secrets: armazena dados sensíveis como as conexões para o banco de dados
 * Deployment: gerencia os pods e as suas réplicas
-* ReplicaSet: garante que o número réplicas dos pods estejam em execução (mínimo 2 réplicas)
+* ReplicaSet: garante que um número de réplicas dos pods esteja em execução (mínimo 2 réplicas)
 * Pod contém:
-  - 1 instância para o armazenamento de cache em memória
-  - 1 instância para o banco de dados
-  - 1 instância para a aplicação
+  - 1 contêiner para o armazenamento de cache em memória
+  - 1 contêiner para o banco de dados
+  - 1 contêiner para a aplicação
 * Service: expõe o conjunto de pods como um serviço de rede
 
 # Execução do Projeto

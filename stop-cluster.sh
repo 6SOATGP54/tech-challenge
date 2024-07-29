@@ -2,7 +2,7 @@
 
 if kubectl -v &> /dev/null
 then
-	echo "Starting cluster..."
+	echo "Stopping cluster..."
 else
 	echo "Error. Please install Kubectl"
 	echo "visit: https://kubernetes.io/docs/reference/kubectl/kubectl/"
