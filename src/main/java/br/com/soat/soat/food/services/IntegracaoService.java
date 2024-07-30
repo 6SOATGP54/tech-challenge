@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,7 +78,9 @@ public class IntegracaoService {
                         EndpointsIntegracaoEnum.CRIAR_LOJA);
 
 
-        escopoLojaMercadoPago.setUserId(o instanceof Long ? (Long) o : 0L);
+        escopoLojaMercadoPago.setUserId(o instanceof Long ? (Long) o : null);
+
+        Logger.getAnonymousLogger().info("Persistindo Loja no banco id retornado do agente externo" + escopoLojaMercadoPago.getUserId());
 
         if (escopoLojaMercadoPago.getUserId() != null) {
             return lojaMercadoLivreRepository.save(escopoLojaMercadoPago);
@@ -154,7 +157,9 @@ public class IntegracaoService {
                         url,
                         HttpMethod.POST, EndpointsIntegracaoEnum.CRIAR_CAIXA);
 
-        caixa.setIdAPI(o instanceof Long ? (Long) o : 0L);
+        caixa.setIdAPI(o instanceof Long ? (Long) o : null);
+
+        Logger.getAnonymousLogger().info("Persistindo CAIXA no banco id retornado do agente externo" + caixa.getIdAPI());
 
         if (caixa.getIdAPI() != null) {
             return caixaMercadoPagoRepository.save(caixa);
