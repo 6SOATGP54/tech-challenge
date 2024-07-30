@@ -54,7 +54,7 @@ spec:
         - name: redis-storage
           mountPath: /data
       - name: app-food
-        image: brunomatiasdev/tech-challenge:latest
+        image: cledkube/food-app:latest
         resources:
           requests:
             cpu: "100m"
