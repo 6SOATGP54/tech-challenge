@@ -149,6 +149,8 @@ Após a aplicação subir, acesse seu endereço para visualizar a API via Swagge
 * local: http://localhost:8091/api/swagger-ui/index.html
 * nuvem: https://endereco-na-nuvem-exemplo:8091/api/swagger-ui/index.html
 
+**Guia para execução da API**: acesse nosso [Guia com ordem de execução das APIs](./docs/tutorials/USAGE.md).
+
 # Membros
 Grupo nº 54 da turma 6SOAT/2024 do curso *lato sensu* "Especialização em Arquitetura de Software" composto por:
 - Bruno Matias
