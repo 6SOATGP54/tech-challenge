@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 @Service
 public class RequestServices {
@@ -37,12 +38,8 @@ public class RequestServices {
 
             body = response.getBody();
 
-            if (body instanceof LinkedHashMap<?, ?>) {
-                LinkedHashMap<?, ?> map = (LinkedHashMap<?, ?>) body;
-                return map.get("id");
-            }
-
-            if (EndpointsIntegracaoEnum.CRIAR_CAIXA.equals(endpointsIntegracaoEnum)) {
+            if (EndpointsIntegracaoEnum.CRIAR_CAIXA.equals(endpointsIntegracaoEnum) ||
+                    EndpointsIntegracaoEnum.CRIAR_LOJA.equals(endpointsIntegracaoEnum)) {
                 JSONObject jsonObject = new JSONObject(response);
                 Map<String, Object> map = jsonObject.toMap();
 
@@ -61,7 +58,7 @@ public class RequestServices {
                     }
                 });
 
-                return id.get() != null ? id.get() : 0L;
+                return id.get() != null ? id.get() : null;
             }
 
             if (EndpointsIntegracaoEnum.GERARQRCODE.equals(endpointsIntegracaoEnum)) {
@@ -87,8 +84,7 @@ public class RequestServices {
             }
             return body;
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Erro ao criar caixa");
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

@@ -89,20 +89,67 @@ Dicionário em linguagem ubíqua:
 - **Produto** se refere a qualquer item disponível para seleção e compra pelos clientes na lanchonete, como lanches, acompanhamentos, bebidas e sobremesas com nome, descrição, categoria, preço e uma imagem associada.
 - **Sobremesa** é um dos quatro tipos de produtos ofertados pela lanchonete na montagem do pedido, de escolha opcional, para o cliente.
 - **Status do pedido** se refere ao estado em que o pedido do cliente se encontra, como "recebido", "em preparação", "pronto" e "finalizado".
-- **Tempo de espera do pedido** se refere ao período de tempo estimado entre o momento em que o cliente faz o pedido e o momento em que ele o recebe. 
+- **Tempo de espera do pedido** se refere ao período de tempo estimado entre o momento em que o cliente faz o pedido e o momento em que ele o recebe.
+
+# Requisitos de Infraestrutura
+
+<p align="center">
+    <img src="./docs/diagrams/desenho-arquitetura-cloud.png">Diagrama de infraestrutura - Kubernates</img>
+</p>
+
+**Descrição detalhada**:
+* Secrets: armazena dados sensíveis como as conexões para o banco de dados
+* Deployment: gerencia os pods e as suas réplicas
+* ReplicaSet: garante que um número de réplicas dos pods esteja em execução (mínimo 2 réplicas)
+* Pod contém:
+  - 1 contêiner para o armazenamento de cache em memória
+  - 1 contêiner para o banco de dados
+  - 1 contêiner para a aplicação
+* Service: expõe o conjunto de pods como um serviço de rede
 
 # Execução do Projeto
+
+O projeto foi construído em uma Arquitetura Limpa e escalável para execução isolada em contêineres Docker ou em cluster, tanto local quanto em nuvem, utilizando Kubernates.
+
+## Utilizando apenas Docker
+
 :warning: Necesário possuir [Docker](https://www.docker.com/) instalado. Como super usuário, execute:
 
 ```bash
 docker-compose --env-file .develop.env up
 ```
 
-A execução do projeto consiste em:
+O projeto subirá com:
+- 1 instância para o armazenamento de cache em memória
 - 1 instância para o banco de dados
 - 1 instância para a aplicação
 
-Após a aplicação subir, acesse http://localhost:8091/api/swagger-ui/index.html para visualizar a API via Swagger.
+## Utilizando Kubernates
+
+:warning: Necessário possuir [Kubectl](https://kubernetes.io/docs/tasks/tools/) para executar comandos ao cluster em Kubernates.
+
+Primeiro conecte-se a um cluster de sua preferência:
+* Opções em nuvem:
+  * Azure Kubernetes Service (AKS)
+  * Amazon Elastic Kubernetes Service (EKS)
+  * Google Kubernetes Engine (GKE)
+* Opções locais:
+  * Docker Kubernetes (recomendamos para usuários Windows e Mac)
+  * Minicube (recomendamos para usuários Linux)
+
+
+Execute (em ambiente Linux):
+```
+./start-cluster.sh
+```
+
+Para ambientes Windows você pode usar o script `./start-cluster.bat`.
+
+Após a aplicação subir, acesse seu endereço para visualizar a API via Swagger:
+* local: http://localhost:8091/api/swagger-ui/index.html
+* nuvem: https://endereco-na-nuvem-exemplo:8091/api/swagger-ui/index.html
+
+**Guia para execução da API**: acesse nosso [Guia com ordem de execução das APIs](./docs/tutorials/USAGE.md).
 
 # Membros
 Grupo nº 54 da turma 6SOAT/2024 do curso *lato sensu* "Especialização em Arquitetura de Software" composto por:
