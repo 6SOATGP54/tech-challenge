@@ -151,7 +151,7 @@ Após a aplicação subir, acesse seu endereço para visualizar a API via Swagge
 
 
 
-# Membros
+# MEMBROS
 Grupo nº 54 da turma 6SOAT/2024 do curso *lato sensu* "Especialização em Arquitetura de Software" composto por:
 - Bruno Matias
 - Clederson Cruz
