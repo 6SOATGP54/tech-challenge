@@ -3,6 +3,12 @@ LABEL maintainer="https://github.com/6SOATGP54"
 
 WORKDIR /home
 
+#Envoiroments
+ENV URL_DB=""  \
+    HOST_DB="" \
+    DB_USER="" \
+    DB_PASSWORD="" \
+
 # updates source list
 RUN apk update
 
