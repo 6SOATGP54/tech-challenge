@@ -12,47 +12,6 @@ spec:
         app: app-food-selector
     spec:
       containers:
-      - name: postgres-db
-        image: postgres:16
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "256Mi"
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          value: food
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: username
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: password
-        volumeMounts:
-        - name: postgres-storage
-          mountPath: /var/lib/postgresql/data
-      - name: redis
-        image: redis:alpine
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "256Mi"
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-        ports:
-        - containerPort: 6379
-        volumeMounts:
-        - name: redis-storage
-          mountPath: /data
       - name: app-food
         image: cledkube/food-app:latest
         resources:
@@ -64,8 +23,18 @@ spec:
             memory: "512Mi"
         ports:
         - containerPort: 8091
-      volumes:
-      - name: postgres-storage
-      - name: redis-storage
-        emptyDir: {}
-      
+        env:
+        - name: HOST_DB
+          value: food
+        - name: URL_DB
+          value: #TODO: URL DO RDS
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: rds-postgres-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rds-postgres-secret
+              key: password
