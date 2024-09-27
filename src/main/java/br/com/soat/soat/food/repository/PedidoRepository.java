@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido,Long> {
@@ -18,4 +19,6 @@ public interface PedidoRepository extends JpaRepository<Pedido,Long> {
     int statusPedido(StatusPedido statusPedido, Long id);
 
     List<Pedido> findByStatusPedido(StatusPedido statusPedido);
+
+    Optional<Pedido> findByReferencia(String referencia);
 }

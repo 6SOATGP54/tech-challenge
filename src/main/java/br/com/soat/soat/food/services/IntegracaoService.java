@@ -5,6 +5,7 @@ import br.com.soat.soat.food.dtos.EscopoLojaMercadoPagoDTO;
 import br.com.soat.soat.food.dtos.IntervalosDTO;
 import br.com.soat.soat.food.enums.EndpointsIntegracaoEnum;
 import br.com.soat.soat.food.enums.StatusPedido;
+import br.com.soat.soat.food.exeception.PedidoNaoEncontradoExeception;
 import br.com.soat.soat.food.model.CredenciaisAcesso;
 import br.com.soat.soat.food.model.EscopoCaixaMercadoPago;
 import br.com.soat.soat.food.model.EscopoLojaMercadoPago;
@@ -38,9 +39,6 @@ public class IntegracaoService {
 
     @Autowired
     CaixaMercadoPagoRepository caixaMercadoPagoRepository;
-
-    @Autowired
-    RedisService redisService;
 
     @Autowired
     PedidoRepository pedidoRepository;
@@ -197,13 +195,14 @@ public class IntegracaoService {
             System.out.println(status);
             System.out.println(externalReference);
 
-            Object encontrado = redisService.find(externalReference);
+            pedidoRepository.findByReferencia(externalReference).ifPresentOrElse(pedido -> {
+                pedido.setStatusPedido(StatusPedido.RECEBIDO);
+                pedido.setPagamento(status);
+                pedidoRepository.save(pedido);
+            }, () -> {
+                throw new PedidoNaoEncontradoExeception("Pedido não encontrado para a referência: " + externalReference);
+            });
 
-            Pedido pedido = objectMapper.convertValue(encontrado, Pedido.class);
-            pedido.setStatusPedido(StatusPedido.RECEBIDO);
-            pedido.setPagamento(status);
-            pedidoRepository.save(pedido);
-            redisService.delete(externalReference);
         }
     }
 }

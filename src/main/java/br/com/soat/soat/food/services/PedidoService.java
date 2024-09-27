@@ -6,6 +6,7 @@ import br.com.soat.soat.food.dtos.ItemOrdemVendaDTO;
 import br.com.soat.soat.food.dtos.OrdemVendaMercadoPagoDTO;
 import br.com.soat.soat.food.enums.EndpointsIntegracaoEnum;
 import br.com.soat.soat.food.enums.StatusPedido;
+import br.com.soat.soat.food.exeception.QRCodeExeception;
 import br.com.soat.soat.food.model.CredenciaisAcesso;
 import br.com.soat.soat.food.model.EscopoCaixaMercadoPago;
 import br.com.soat.soat.food.model.Pedido;
@@ -37,9 +38,6 @@ public class PedidoService {
 
     @Autowired
     CredenciaisIntegracaoRepository credenciaisIntegracaoRepository;
-
-    @Autowired
-    RedisService redisService;
 
     @Autowired
     CaixaMercadoPagoRepository caixaMercadoPagoRepository;
@@ -100,8 +98,9 @@ public class PedidoService {
                     EndpointsIntegracaoEnum.GERARQRCODE);
 
             if(o != null){
-                redisService.save(identificacaoPedido,pedido);
                 return (String) o;
+            }else{
+                throw new QRCodeExeception("Não foi possivel gerar o QRCODE");
             }
         }
 
