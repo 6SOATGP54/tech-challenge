@@ -7,7 +7,7 @@ WORKDIR /home
 ENV URL_DB=""  \
     HOST_DB="" \
     DB_USER="" \
-    DB_PASSWORD="" \
+    DB_PASSWORD=""
 
 # updates source list
 RUN apk update
