@@ -91,21 +91,18 @@ Dicionário em linguagem ubíqua:
 - **Status do pedido** se refere ao estado em que o pedido do cliente se encontra, como "recebido", "em preparação", "pronto" e "finalizado".
 - **Tempo de espera do pedido** se refere ao período de tempo estimado entre o momento em que o cliente faz o pedido e o momento em que ele o recebe.
 
-# Requisitos de Infraestrutura
+# Desenho da Arquitetura na AWS
 
 <p align="center">
-    <img src="./docs/diagrams/desenho-arquitetura-cloud.png">Diagrama de infraestrutura - Kubernates</img>
+    <img src="./docs/diagrams/fase-3-architecture.jpg">Diagrama de Arquitetura na AWS</img>
 </p>
 
 **Descrição detalhada**:
-* Secrets: armazena dados sensíveis como as conexões para o banco de dados
-* Deployment: gerencia os pods e as suas réplicas
-* ReplicaSet: garante que um número de réplicas dos pods esteja em execução (mínimo 2 réplicas)
-* Pod contém:
-  - 1 contêiner para o armazenamento de cache em memória
-  - 1 contêiner para o banco de dados
-  - 1 contêiner para a aplicação
-* Service: expõe o conjunto de pods como um serviço de rede
+* **Users**: são os clientes que acessam o sistema de autoatendimento.
+* **API Gateway**: Gerencia o tráfego de APIs que chega do ambiente externo (fora da AWS) para os serviços de back-end.
+* **EKS**: gerencia os PODs da aplicação (mínimo 2) em uma subnet.
+* **Lambda**: responsável por receber as credenciais dos clientes e autenticá-las com Cognito (IAM) e, caso sejam validadas, devolve à autenticação.
+* **RDS**: banco de dados Aurora que armazena informações referentes ao pedido, catálogo de produtos, clientes e integrações com APIs. É executado em uma subnet apartada dentro da mesma VPC na qual pertence o EKS.
 
 # Execução do Projeto
 
@@ -128,28 +125,25 @@ O projeto subirá com:
 
 :warning: Necessário possuir [Kubectl](https://kubernetes.io/docs/tasks/tools/) para executar comandos ao cluster em Kubernates.
 
-Primeiro conecte-se a um cluster de sua preferência:
-* Opções em nuvem:
+Crie a conta em uma nuvem de sua preferência:
   * Azure Kubernetes Service (AKS)
   * Amazon Elastic Kubernetes Service (EKS)
   * Google Kubernetes Engine (GKE)
-* Opções locais:
-  * Docker Kubernetes (recomendamos para usuários Windows e Mac)
-  * Minicube (recomendamos para usuários Linux)
 
-
-Execute (em ambiente Linux):
-```
-./start-cluster.sh
-```
-
-Para ambientes Windows você pode usar o script `./start-cluster.bat`.
+Como este exemplo usa a AWS, então:
+1. Configure um usuário para obter suas credenciais
+2. Use o Terraform para subir o RDS (Aurora) e o cluster EKS
+3. Realize o Deploy do Lambda
+4. Verifique as configurações do cluster e seus recursos
 
 Após a aplicação subir, acesse seu endereço para visualizar a API via Swagger:
-* local: http://localhost:8091/api/swagger-ui/index.html
-* nuvem: https://endereco-na-nuvem-exemplo:8091/api/swagger-ui/index.html
+* https://endereco-na-nuvem-exemplo/api/swagger-ui/index.html
 
-**Guia para execução da API**: acesse nosso [Guia com ordem de execução das APIs](./docs/tutorials/USAGE.md).
+Obs.: o endereço da aplicação pode ser obtido com o comando `kubectl get svc -o wide` via console.
+
+## Guia para execução da API
+
+Acesse nosso [Guia com ordem de execução das APIs](./docs/tutorials/USAGE.md).
 
 # Membros
 Grupo nº 54 da turma 6SOAT/2024 do curso *lato sensu* "Especialização em Arquitetura de Software" composto por:
